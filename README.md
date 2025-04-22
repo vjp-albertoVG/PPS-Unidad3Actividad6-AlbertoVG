@@ -56,7 +56,7 @@ echo "Transferidos $$amount";
 </form>
 ~~~
 
-![](images/csrf1.png)
+![](images/Imagen1.png)
 
 El código no verifica el origen de la solicitud y cualquier página externa puede enviar una petición maliciosa.
 
@@ -78,7 +78,7 @@ Fíjate que el enlace a este archivo http puede haberse hecho llegar a través d
 
 Cuando el usuario autenticado accede a esta página:
 
-![](images/csrf2.png)
+![](images/Imagen2.png)
 
 - La imagen no se carga realmente.
 
@@ -92,7 +92,7 @@ Revisamos el log de apache para confirmar el ataque. Normalmente está en /var/l
 docker exec lamp-php83 /bin/bash -c "tail -5 /var/log/apache2/other_vhosts_access.log"
 ~~~
 
-![](images/csrf3.png)
+![](images/Imagen3.png)
 
 Confirmación: El ataque CSRF se ejecutó correctamente
 
@@ -120,7 +120,7 @@ Crea el archivo csrf_attack2.html:
 ~~~
 El usuario al realizar una transferencia, no se dá cuenta que en realidad ha realizado una transferencia a la cuenta del atacante
 
-![](images/csrf4.png)
+![](images/Imagen4.png)
 
 
 ### Mitigaciones
@@ -158,7 +158,7 @@ Con esta validación, transfer.php rechazará cualquier petición POST sin un to
 
 Probamos a ejecutar de nuevo csrf_attack2.html:
 
-![](images/csrf5.png)
+![](images/Imagen5.png)
 
 **Bloqueando Solicitudes CSRF con Encabezados HTTP**
 ---
@@ -195,7 +195,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 Probamos a ejecutar de nuevo csrf_attack2.html:
 
-![](images/csrf5.png)
+![](images/Imagen6.png)
 
 **Proteger con SameSite=Strict en Cookies**
 ---
@@ -210,7 +210,7 @@ Esto evitará que un atacante pueda robar la sesión en peticiones automáticas.
 
 Probamos a ejecutar de nuevo csrf_attack2.html:
 
-![](images/csrf5.png)
+![](images/Imagen7.png)
 
 **Probamos con todas la mitigaciones**
 ---
@@ -255,6 +255,8 @@ echo "Transferidos $$amount";
 <button type="submit">Transferir</button>
 </form>
 ~~~
+
+![](images/Imagen8.png)
 
 Explicación de las correcciones:
 
